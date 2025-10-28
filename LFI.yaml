@@ -77,4 +77,4 @@ requests:
         part: body
         regex:
           - 'root:.*:0:0:'
-		  - 'root:x:0:0:'
+          - 'root:x:0:0:'
