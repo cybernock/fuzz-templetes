@@ -14,92 +14,349 @@ middlename: M
 middle_name: M
 
 # Email Fields
-email: cu4ap9jusq9e8mid6tmg@admin.org
-mail: cu4ap9jusq9e8mid6tmg@admin.org
-emailaddress: cu4ap9jusq9e8mid6tmg@admin.org
-email_address: cu4ap9jusq9e8mid6tmg@admin.org
-user_email: cu4ap9jusq9e8mid6tmg@admin.org
+email: cu4ap9jusq9e8mid6tmg@example.org
+mail: cu4ap9jusq9e8mid6tmg@example.org
+emailaddress: cu4ap9jusq9e8mid6tmg@example.org
+email_address: cu4ap9jusq9e8mid6tmg@example.org
+user_email: cu4ap9jusq9e8mid6tmg@example.org
 
 # Password Fields
-password: katanaP@assw0rd1
-passwd: katanaP@assw0rd1
-pwd: katanaP@assw0rd1
-pass: katanaP@assw0rd1
-newpassword: katanaP@assw0rd1
-new_password: katanaP@assw0rd1
-confirmpassword: katanaP@assw0rd1
-confirm_password: katanaP@assw0rd1
-current_password: katanaP@assw0rd1
+password: adminP@assw0rd1
+passwd: adminP@assw0rd1
+pwd: adminP@assw0rd1
+pass: "u]H[ww6KrA9F.x-F"
+newpassword: adminP@assw0rd1
+new_password: adminP@assw0rd1
+confirmpassword: "u]H[ww6KrA9F.x-F"
+confirm_password: "u]H[ww6KrA9F.x-F"
+current_password: adminP@assw0rd1
+verify: "u]H[ww6KrA9F.x-F"
+retype: "u]H[ww6KrA9F.x-F"
 
 # Phone Number Fields
-phone: "2124567890"
-telephone: "2124567890"
-tel: "2124567890"
-phonenumber: "2124567890"
-phone_number: "2124567890"
-mobile: "2124567890"
-cell: "2124567890"
-cellphone: "2124567890"
+phone: "555-666-0606"
+telephone: "555-666-0606"
+tel: "555-666-0606"
+phonenumber: "555-666-0606"
+phone_number: "555-666-0606"
+mobile: "987-65-4329"
+cell: "555-666-0606"
+cellphone: "555-666-0606"
+fax: "317-317-3137"
+telefon: "555-666-0606"
+
 
 # Address Fields
-address: 123 Main Street
-streetaddress: 123 Main Street
-street_address: 123 Main Street
-address1: 123 Main Street
-address_line1: 123 Main Street
-address2: Apt 4B
-address_line2: Apt 4B
-city: New York
-town: New York
-state: NY
-province: NY
-region: NY
-country: United States
-countrycode: US
-country_code: US
-zipcode: "10001"
-zip_code: "10001"
-postalcode: "10001"
-postal_code: "10001"
+address: "3137 Laguna Street"
+streetaddress: "3137 Laguna Street"
+street_address: "3137 Laguna Street"
+street: "3137 Laguna Street"
+addr: "3137 Laguna Street"
+address1: "3137 Laguna Street"
+address_line1: "3137 Laguna Street"
+address2: "Apt 4B"
+address_line2: "Apt 4B"
+city: "San Francisco"
+town: "NYC"
+state: "NY"
+province: "NY"
+region: "NY"
+country: "USA"
+countrycode: "US"
+country_code: "US"
+zipcode: "94102"
+zip_code: "94102"
+zip: "94102"
+postalcode: "94102"
+postal_code: "94102"
+postal: "94102"
+county: "NY"
+area: "555"
+code: "000000"
 
 # Company/Organization Fields
-company: Katana Corp
-organization: Katana Corp
-companyname: Katana Corp
-company_name: Katana Corp
-jobtitle: Security Researcher
-job_title: Security Researcher
-title: Mr
-occupation: Security Researcher
+company: "Testing"
+organization: "Testing"
+companyname: "Testing"
+company_name: "Testing"
+comp: "Testing"
+employer: "Testing"
+jobtitle: "Security Researcher"
+job_title: "Security Researcher"
+title: "Mr."
+titre: "Mr."
+titolo: "Mr."
+occupation: "programmer"
+occupazione: "programmer"
+beruf: "programmer"
 
-# Date/Time Fields
-date: 2025-11-04
-datetime: 2025-11-04T19:07:00
-birthdate: 1990-01-01
-birth_date: 1990-01-01
-dob: 1990-01-01
-birthday: 1990-01-01
-year: "2025"
-month: "11"
-day: "04"
+# ====================================================================
+# DATE/TIME FIELDS
+# ====================================================================
 
-# Website/URL Fields
-website: https://admin.com
-url: https://admin.com
-homepage: https://admin.com
-site: https://admin.com
-
-# Color Fields
-color: '#e66465'
-colour: '#e66465'
-bgcolor: '#e66465'
-background_color: '#e66465'
-
-# Number Fields
-age: "25"
+date: "01/01/1967"
+data: "01/01/1967"
+datetime: "2011-01-01T00:00:00Z"
+birthdate: "01/01/1967"
+birth_date: "01/01/1967"
+birthday: "01/01/1967"
+compleanno: "01/01/1967"
+birth_year: "1967"
+dob: "1967/1/1"
+year: "1967"
+anno: "1967"
+jahr: "1967"
+month: "7"
+monat: "7"
+mois: "7"
+day: "17"
+giorno: "17"
+tag: "17"
+jour: "17"
+timestamp: "2011-01-01T00:00:00Z"
+before: "01/01/2050"
+after: "01/01/1950"
+awayyear: "9999"
+time: "07:10:00"
+at: "2023-03-22T15:34:00Z"
 quantity: "1"
 amount: "100"
 number: "42"
+
+# ====================================================================
+# WEBSITE/URL/DOMAIN FIELDS
+# ====================================================================
+
+website: "http://www.example.com"
+url: "http://www.example.com"
+uri: "http://www.example.com"
+link: "http://www.example.com"
+homepage: "http://www.example.com"
+domain: "www.example.com"
+site: "http://www.example.com"
+sito: "http://www.example.com"
+web: "http://www.example.com"
+referer: "http://www.google.com/search?hl=en&q=testing"
+
+# ====================================================================
+# NETWORK/IP FIELDS
+# ====================================================================
+
+ip: "127.0.0.1"
+host: "www.example.com"
+port: "80"
+scheme: "http"
+origin: "http://www.example.com/"
+path: "/"
+
+# ====================================================================
+# COLOR FIELDS
+# ====================================================================
+
+color: "#e66465"
+colour: "#e66465"
+bgcolor: "#ffffff"
+background_color: "#ffffff"
+
+# ====================================================================
+# SEARCH FIELDS
+# ====================================================================
+
+search: "test"
+query: "test"
+q: "test"
+filter: "test"
+find: "the"
+keywords: "admin"
+searchterm: "admin"
+search_term: "admin"
+
+# ====================================================================
+# IDENTIFIER FIELDS
+# ====================================================================
+
+id: "1"
+accounts: "1001160141"
+passport: "111122223"
+ssn: "987-65-4329"
+social: "987-65-4329"
+realname: TestUser
+prefix: "317"
+cvv: "586"
+cvc: "123"
+
+# ====================================================================
+# FINANCIAL/PAYMENT FIELDS
+# ====================================================================
+
+creditcard: "4111111111111111"
+cardnum: "4111111111111111"
+cardnumber: "4111111111111111"
+credit: "4111111111111111"
+cc: "4111111111111111"
+cardexpiry: "11/2011"
+expiration: "11/11"
+exp: "11/11"
+currency: "USD"
+
+# ====================================================================
+# COMMUNICATION FIELDS
+# ====================================================================
+
+msn: "testing@example.com"
+yahoo: "testing@example.com"
+sender: "testing@example.com"
+
+# ====================================================================
+# PERSONAL INFORMATION FIELDS
+# ====================================================================
+
+gender: "male"
+genere: "male"
+geschlecht: "male"
+sex: "male"
+sesso: "male"
+age: "20"
+eta: "20"
+alter: "20"
+middle: "A"
+last: TestUser
+ultimo: TestUser
+dauern: TestUser
+dernier: TestUser
+connexion: TestUser
+first: "Testing"
+zuerst: "Testing"
+premier: "Testing"
+nick: TestUser
+pseudo: TestUser
+surname: TestUser
+cognome: TestUser
+famille: TestUser
+nachname: TestUser
+
+# ====================================================================
+# LANGUAGE/LOCALE FIELDS
+# ====================================================================
+
+language: "en-US"
+locale: "en-US"
+lingua: "english"
+sprache: "english"
+langue: "english"
+timezone: "America/New_York"
+
+# ====================================================================
+# GEOGRAPHIC FIELDS
+# ====================================================================
+
+latitude: "39.7817"
+longitude: "-89.6501"
+residence: "USA"
+paese: "USA"
+pays: "USA"
+land: "USA"
+stadt: "San Francisco"
+ville: "San Francisco"
+citta: "San Francisco"
+provincia: "NY"
+provinz: "NY"
+stato: "NY"
+etat: "NY"
+
+# ====================================================================
+# CHECKBOX VALUES (typically true/false, yes/no, 1/0)
+# ====================================================================
+
+checkbox: "on"
+agree: "on"
+terms: "on"
+accept: "on"
+subscribe: "on"
+newsletter: "on"
+remember: "on"
+remember_me: "on"
+
+# ====================================================================
+# RADIO BUTTON VALUES
+# ====================================================================
+
+option: "yes"
+choice: "option1"
+
+# ====================================================================
+# SELECT/DROPDOWN VALUES
+# ====================================================================
+
+select: "option1"
+dropdown: "option1"
+category: "general"
+type: "standard"
+
+# ====================================================================
+# FILE UPLOAD FIELDS
+# ====================================================================
+
+file: "test.txt"
+upload: "test.txt"
+attachment: "test.txt"
+document: "test.txt"
+image: "test.png"
+
+# ====================================================================
+# SOCIAL MEDIA FIELDS
+# ====================================================================
+
+twitter: "admin_test"
+facebook: "admin.test"
+linkedin: "admin-test"
+instagram: "admin_test"
+github: "admin-test"
+
+# ====================================================================
+# MISCELLANEOUS FIELDS
+# ====================================================================
+
+placeholder: "admin"
+value: "admin"
+input: "admin"
+field: "admin"
+data: "admin"
+nickname: "admin_nick"
+displayname: "adminUser"
+display_name: "adminUser"
+accountname: "admin_account"
+account_name: "admin_account"
+voucher: "DISCOUNT"
+coupon: "DISCOUNT"
+promocode: "DISCOUNT"
+promo_code: "DISCOUNT"
+
+# ====================================================================
+# SECURITY/VERIFICATION FIELDS
+# ====================================================================
+
+captcha: "test_captcha"
+recaptcha: "test_recaptcha"
+verification: "test_verify"
+otp: "123456"
+token: "test_token"
+securitycode: "123456"
+security_code: "123456"
+
+# ====================================================================
+# HEADER FIELDS (Common HTTP Headers for Testing)
+# ====================================================================
+
+client_ip: "127.0.0.1"
+client-ip: "127.0.0.1"
+x_forwarded_for: "127.0.0.1"
+x-forwarded-for: "127.0.0.1"
+x_forwarded_host: "localhost"
+x-forwarded-host: "localhost"
+accept_language: "en"
+accept-language: "en"
+via: "1.1 wa.www.example.com"
 
 # Text Area Fields
 message: This is a test message from Katana crawler
@@ -113,95 +370,3 @@ feedback: Test feedback
 details: Test details
 text: Test text content
 content: Test content
-
-# Search Fields
-search: katana
-query: katana
-q: katana
-keywords: katana
-searchterm: katana
-search_term: katana
-
-# Placeholder/Generic Fields
-placeholder: katana
-value: katana
-input: katana
-field: katana
-data: katana
-
-# Checkbox Values (typically true/false, yes/no, 1/0)
-checkbox: "on"
-agree: "on"
-terms: "on"
-accept: "on"
-subscribe: "on"
-newsletter: "on"
-remember: "on"
-remember_me: "on"
-
-# Radio Button Values
-gender: male
-sex: male
-option: yes
-choice: option1
-
-# Select/Dropdown Values
-select: option1
-dropdown: option1
-category: general
-type: standard
-
-# File Upload Fields
-file: test.txt
-upload: test.txt
-attachment: test.txt
-document: test.txt
-image: test.png
-
-# Social Media Fields
-twitter: katana_test
-facebook: katana.test
-linkedin: katana-test
-instagram: katana_test
-github: katana-test
-
-# Credit Card Fields (for testing only - use dummy data)
-cardnumber: "4111111111111111"
-card_number: "4111111111111111"
-ccnumber: "4111111111111111"
-creditcard: "4111111111111111"
-cvv: "123"
-cvc: "123"
-cardexpiry: "12/25"
-card_expiry: "12/25"
-expiration: "12/25"
-
-# Additional Common Fields
-nickname: katana_nick
-displayname: KatanaUser
-display_name: KatanaUser
-accountname: katana_account
-account_name: katana_account
-referrer: https://admin.com
-source: web
-campaign: test
-voucher: KATANA2025
-coupon: KATANA2025
-promocode: KATANA2025
-promo_code: KATANA2025
-
-# Security/Verification Fields
-captcha: test_captcha
-recaptcha: test_recaptcha
-verification: test_verify
-otp: "123456"
-code: "123456"
-token: test_token
-securitycode: "123456"
-security_code: "123456"
-
-# Language/Locale Fields
-language: en
-locale: en_US
-timezone: America/New_York
-currency: USD
