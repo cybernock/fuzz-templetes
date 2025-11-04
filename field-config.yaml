@@ -1,0 +1,295 @@
+# Email Extraction
+- name: email
+  type: regex
+  part: response
+  regex:
+  - '([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)'
+  - '([a-zA-Z0-9+._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)'
+  - '([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})'
+
+# Phone Number Extraction (Various Formats)
+- name: phone
+  type: regex
+  part: response
+  regex:
+  - '\d{3}-\d{8}|\d{4}-\d{7}'
+  - '\+?\d{1,3}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}'
+  - '\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
+  - '\+1[-.\s]?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
+
+# US Phone Numbers
+- name: us_phone
+  type: regex
+  part: response
+  regex:
+  - '(\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}'
+
+# International Phone Numbers
+- name: international_phone
+  type: regex
+  part: response
+  regex:
+  - '\+\d{1,3}[-.\s]?\d{1,14}'
+
+# IP Addresses (IPv4)
+- name: ipv4
+  type: regex
+  part: response
+  regex:
+  - '\b(?:\d{1,3}\.){3}\d{1,3}\b'
+  - '(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'
+
+# IP Addresses (IPv6)
+- name: ipv6
+  type: regex
+  part: response
+  regex:
+  - '(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}'
+  - '(?:[A-Fa-f0-9]{1,4}:){1,7}:'
+  - '(?:[A-Fa-f0-9]{1,4}:){1,6}:[A-Fa-f0-9]{1,4}'
+
+# URLs
+- name: urls
+  type: regex
+  part: response
+  regex:
+  - 'https?://[^\s<>"{}|\\^`\[\]]+'
+  - '(?:http|https|ftp)://[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(?:/[^\s]*)?'
+
+# Domain Names
+- name: domains
+  type: regex
+  part: response
+  regex:
+  - '(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}'
+  - '\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]\b'
+
+# API Keys (Generic)
+- name: api_keys
+  type: regex
+  part: response
+  regex:
+  - '[aA][pP][iI][-_]?[kK][eE][yY]\s*[:=]\s*["\']?([a-zA-Z0-9_\-]{20,})["\']?'
+  - 'api[-_]?key\s*[:=]\s*["\']?([a-zA-Z0-9_\-]{20,})["\']?'
+
+# AWS Access Keys
+- name: aws_keys
+  type: regex
+  part: response
+  regex:
+  - '(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'
+  - 'aws(.{0,20})?["\'][0-9a-zA-Z\/+]{40}["\']'
+
+# AWS Secret Keys
+- name: aws_secret
+  type: regex
+  part: response
+  regex:
+  - 'aws(.{0,20})?["\'][0-9a-zA-Z\/+=]{40}["\']'
+
+# GitHub Tokens
+- name: github_token
+  type: regex
+  part: response
+  regex:
+  - 'ghp_[0-9a-zA-Z]{36}'
+  - 'gho_[0-9a-zA-Z]{36}'
+  - 'ghu_[0-9a-zA-Z]{36}'
+  - 'ghs_[0-9a-zA-Z]{36}'
+  - 'ghr_[0-9a-zA-Z]{36}'
+
+# Private Keys
+- name: private_key
+  type: regex
+  part: response
+  regex:
+  - '-----BEGIN (?:RSA|DSA|EC|OPENSSH) PRIVATE KEY-----'
+  - '-----BEGIN PRIVATE KEY-----'
+
+# JWT Tokens
+- name: jwt
+  type: regex
+  part: response
+  regex:
+  - 'eyJ[A-Za-z0-9_-]*\.eyJ[A-Za-z0-9_-]*\.[A-Za-z0-9_-]*'
+
+# Credit Card Numbers (for detection only)
+- name: credit_card
+  type: regex
+  part: response
+  regex:
+  - '\b(?:\d{4}[-\s]?){3}\d{4}\b'
+  - '\b\d{13,19}\b'
+
+# Social Security Numbers (US)
+- name: ssn
+  type: regex
+  part: response
+  regex:
+  - '\b\d{3}-\d{2}-\d{4}\b'
+  - '\b\d{9}\b'
+
+# Dates (Various Formats)
+- name: dates
+  type: regex
+  part: response
+  regex:
+  - '\d{4}-\d{2}-\d{2}'
+  - '\d{2}/\d{2}/\d{4}'
+  - '\d{2}-\d{2}-\d{4}'
+
+# MD5 Hashes
+- name: md5
+  type: regex
+  part: response
+  regex:
+  - '\b[a-fA-F0-9]{32}\b'
+
+# SHA1 Hashes
+- name: sha1
+  type: regex
+  part: response
+  regex:
+  - '\b[a-fA-F0-9]{40}\b'
+
+# SHA256 Hashes
+- name: sha256
+  type: regex
+  part: response
+  regex:
+  - '\b[a-fA-F0-9]{64}\b'
+
+# Usernames
+- name: username
+  type: regex
+  part: response
+  regex:
+  - 'username["\']?\s*[:=]\s*["\']?([a-zA-Z0-9_\-\.]{3,30})["\']?'
+  - 'user["\']?\s*[:=]\s*["\']?([a-zA-Z0-9_\-\.]{3,30})["\']?'
+
+# Passwords (in comments or configs - for testing)
+- name: password_leak
+  type: regex
+  part: response
+  regex:
+  - 'password["\']?\s*[:=]\s*["\']?([^\s"\']{4,})["\']?'
+  - 'passwd["\']?\s*[:=]\s*["\']?([^\s"\']{4,})["\']?'
+
+# Database Connection Strings
+- name: db_connection
+  type: regex
+  part: response
+  regex:
+  - 'mongodb(\+srv)?://[^\s"]+'
+  - 'mysql://[^\s"]+'
+  - 'postgresql://[^\s"]+'
+  - 'jdbc:[^\s"]+'
+
+# S3 Buckets
+- name: s3_bucket
+  type: regex
+  part: response
+  regex:
+  - 's3://[a-zA-Z0-9.\-]+/?'
+  - '[a-zA-Z0-9.\-]+\.s3\.amazonaws\.com'
+  - '[a-zA-Z0-9.\-]+\.s3-[a-zA-Z0-9\-]+\.amazonaws\.com'
+
+# Zip Codes (US)
+- name: zipcode
+  type: regex
+  part: response
+  regex:
+  - '\b\d{5}(?:-\d{4})?\b'
+
+# MAC Addresses
+- name: mac_address
+  type: regex
+  part: response
+  regex:
+  - '(?:[0-9A-Fa-f]{2}[:-]){5}(?:[0-9A-Fa-f]{2})'
+
+# Slack Tokens
+- name: slack_token
+  type: regex
+  part: response
+  regex:
+  - 'xox[baprs]-[0-9]{10,12}-[0-9]{10,12}-[a-zA-Z0-9]{24,32}'
+
+# Google API Keys
+- name: google_api
+  type: regex
+  part: response
+  regex:
+  - 'AIza[0-9A-Za-z\-_]{35}'
+
+# Twitter OAuth
+- name: twitter_oauth
+  type: regex
+  part: response
+  regex:
+  - '[1-9][0-9]+-[0-9a-zA-Z]{40}'
+
+# Facebook Access Tokens
+- name: facebook_token
+  type: regex
+  part: response
+  regex:
+  - 'EAACEdEose0cBA[0-9A-Za-z]+'
+
+# Heroku API Keys
+- name: heroku_api
+  type: regex
+  part: response
+  regex:
+  - '[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}'
+
+# Base64 Encoded Strings
+- name: base64
+  type: regex
+  part: response
+  regex:
+  - '(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?'
+
+# HTML Comments
+- name: html_comments
+  type: regex
+  part: body
+  regex:
+  - '<!--[\s\S]*?-->'
+
+# JavaScript Variables
+- name: js_variables
+  type: regex
+  part: body
+  regex:
+  - 'var\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*='
+  - 'let\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*='
+  - 'const\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*='
+
+# Social Media Handles
+- name: twitter_handle
+  type: regex
+  part: response
+  regex:
+  - '@([A-Za-z0-9_]{1,15})'
+
+# Version Numbers
+- name: version
+  type: regex
+  part: response
+  regex:
+  - '\bv?\d+\.\d+\.\d+(?:\.\d+)?\b'
+
+# File Paths (Unix/Linux)
+- name: unix_path
+  type: regex
+  part: response
+  regex:
+  - '\/(?:[a-zA-Z0-9._-]+\/)*[a-zA-Z0-9._-]+'
+
+# File Paths (Windows)
+- name: windows_path
+  type: regex
+  part: response
+  regex:
+  - '[A-Za-z]:\\(?:[^\\\/:*?"<>|\r\n]+\\)*[^\\\/:*?"<>|\r\n]*'
