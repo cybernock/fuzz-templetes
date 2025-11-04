@@ -1,0 +1,207 @@
+# Text Input Fields
+username: admin
+user: admin
+login: admin
+name: admin
+fullname: admin
+firstname: admin
+first_name: admin
+fname: admin
+lastname: TestUser
+last_name: TestUser
+lname: TestUser
+middlename: M
+middle_name: M
+
+# Email Fields
+email: cu4ap9jusq9e8mid6tmg@admin.org
+mail: cu4ap9jusq9e8mid6tmg@admin.org
+emailaddress: cu4ap9jusq9e8mid6tmg@admin.org
+email_address: cu4ap9jusq9e8mid6tmg@admin.org
+user_email: cu4ap9jusq9e8mid6tmg@admin.org
+
+# Password Fields
+password: katanaP@assw0rd1
+passwd: katanaP@assw0rd1
+pwd: katanaP@assw0rd1
+pass: katanaP@assw0rd1
+newpassword: katanaP@assw0rd1
+new_password: katanaP@assw0rd1
+confirmpassword: katanaP@assw0rd1
+confirm_password: katanaP@assw0rd1
+current_password: katanaP@assw0rd1
+
+# Phone Number Fields
+phone: "2124567890"
+telephone: "2124567890"
+tel: "2124567890"
+phonenumber: "2124567890"
+phone_number: "2124567890"
+mobile: "2124567890"
+cell: "2124567890"
+cellphone: "2124567890"
+
+# Address Fields
+address: 123 Main Street
+streetaddress: 123 Main Street
+street_address: 123 Main Street
+address1: 123 Main Street
+address_line1: 123 Main Street
+address2: Apt 4B
+address_line2: Apt 4B
+city: New York
+town: New York
+state: NY
+province: NY
+region: NY
+country: United States
+countrycode: US
+country_code: US
+zipcode: "10001"
+zip_code: "10001"
+postalcode: "10001"
+postal_code: "10001"
+
+# Company/Organization Fields
+company: Katana Corp
+organization: Katana Corp
+companyname: Katana Corp
+company_name: Katana Corp
+jobtitle: Security Researcher
+job_title: Security Researcher
+title: Mr
+occupation: Security Researcher
+
+# Date/Time Fields
+date: 2025-11-04
+datetime: 2025-11-04T19:07:00
+birthdate: 1990-01-01
+birth_date: 1990-01-01
+dob: 1990-01-01
+birthday: 1990-01-01
+year: "2025"
+month: "11"
+day: "04"
+
+# Website/URL Fields
+website: https://admin.com
+url: https://admin.com
+homepage: https://admin.com
+site: https://admin.com
+
+# Color Fields
+color: '#e66465'
+colour: '#e66465'
+bgcolor: '#e66465'
+background_color: '#e66465'
+
+# Number Fields
+age: "25"
+quantity: "1"
+amount: "100"
+number: "42"
+
+# Text Area Fields
+message: This is a test message from Katana crawler
+comment: This is a test comment from Katana crawler
+comments: This is a test comment from Katana crawler
+description: Test description
+bio: Katana security testing tool user
+about: Testing web crawler functionality
+notes: Test notes
+feedback: Test feedback
+details: Test details
+text: Test text content
+content: Test content
+
+# Search Fields
+search: katana
+query: katana
+q: katana
+keywords: katana
+searchterm: katana
+search_term: katana
+
+# Placeholder/Generic Fields
+placeholder: katana
+value: katana
+input: katana
+field: katana
+data: katana
+
+# Checkbox Values (typically true/false, yes/no, 1/0)
+checkbox: "on"
+agree: "on"
+terms: "on"
+accept: "on"
+subscribe: "on"
+newsletter: "on"
+remember: "on"
+remember_me: "on"
+
+# Radio Button Values
+gender: male
+sex: male
+option: yes
+choice: option1
+
+# Select/Dropdown Values
+select: option1
+dropdown: option1
+category: general
+type: standard
+
+# File Upload Fields
+file: test.txt
+upload: test.txt
+attachment: test.txt
+document: test.txt
+image: test.png
+
+# Social Media Fields
+twitter: katana_test
+facebook: katana.test
+linkedin: katana-test
+instagram: katana_test
+github: katana-test
+
+# Credit Card Fields (for testing only - use dummy data)
+cardnumber: "4111111111111111"
+card_number: "4111111111111111"
+ccnumber: "4111111111111111"
+creditcard: "4111111111111111"
+cvv: "123"
+cvc: "123"
+cardexpiry: "12/25"
+card_expiry: "12/25"
+expiration: "12/25"
+
+# Additional Common Fields
+nickname: katana_nick
+displayname: KatanaUser
+display_name: KatanaUser
+accountname: katana_account
+account_name: katana_account
+referrer: https://admin.com
+source: web
+campaign: test
+voucher: KATANA2025
+coupon: KATANA2025
+promocode: KATANA2025
+promo_code: KATANA2025
+
+# Security/Verification Fields
+captcha: test_captcha
+recaptcha: test_recaptcha
+verification: test_verify
+otp: "123456"
+code: "123456"
+token: test_token
+securitycode: "123456"
+security_code: "123456"
+
+# Language/Locale Fields
+language: en
+locale: en_US
+timezone: America/New_York
+currency: USD
